@@ -1,0 +1,26 @@
+-- Creating Database
+CREATE DATABASE relux_db;
+
+-- Using Database
+USE relux_db;
+
+-- Creating Users Table
+CREATE TABLE users (
+    user_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    firstname VARCHAR(50) NOT NULL,
+    lastname VARCHAR(50) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE KEY,
+    password VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(15) NOT NULL UNIQUE KEY,
+    gender ENUM('Male', 'Female', 'Others') DEFAULT 'Male',
+    user_level ENUM('Admin', 'Vendor', 'User') DEFAULT 'User',
+    user_image VARCHAR(255),
+    verification_code VARCHAR(255),
+    verified BIT DEFAULT 0,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    update_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Remove all existing entries in user Table 
+TRUNCATE TABLE users;
+ALTER TABLE users AUTO_INCREMENT = 1;
